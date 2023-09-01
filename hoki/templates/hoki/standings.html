@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    {% load static%}
+    <link rel="stylesheet" href=
+    "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'futis/style.css'%}"/>
+</head>
+
+<body>
+    <nav class="navbar yla">
+        <a class="navbar-brand" href="/">
+            <div class="mainheader">
+            <h1>Urheilutulokset</h1>
+            </div>
+            <div class="links">
+              <a href="https://sportsdata.io/"><img src="{% static 'futis/io.png'%}" style="width: 50px"/></a>
+              <a href="https://ergast.com/mrd/"><img src="{% static 'futis/ergast.png'%}" style="width: 40px"/></a>
+              <a href="https://apifootball.com/"><img src="{% static 'futis/apifootball.png'%}" style="width: 100px"/></a>
+            </div>
+        </a>
+      </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/#/">Jalkapallo <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/hoki/">Jääkiekko</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/koris/">Koripallo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/golf/">Golf</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/f1/">Formula 1</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/faqs/">Usein kysyttyä</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="parent">
+      <div class="lefti">
+      <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+          <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <h5>NHL</h5>
+            <br><br>
+          <li class="nav-item">
+            <a href="/hoki/" class="nav-link text-white" aria-current="page">
+              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+              Tulokset
+            </a>
+          </li>
+          <li>         
+            <a href="/hoki/standings" class="nav-link active">
+              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+              Sarjataulukko
+            </a>
+          </li>
+          <li>         
+            <div class="sarja" width="16" height="16"><use xlink:href="#speedometer2"/>Valitse konferenssi</div>
+        </li>
+        <li>         
+          <a href="/hoki/standings/" class="nav-link active">
+            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+            Itäinen konferenssi
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/hoki/standingswest/" class="nav-link text-white" aria-current="page">
+            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+            Läntinen konferenssi
+          </a>
+        </li>
+        </ul>
+        </li>
+        </ul>
+        <hr>
+      </div>
+    </div>
+
+    <div class="rightti">
+        <h5>Atlantin divisioona</h5>
+        {% for result in jsonResponse.standings %}
+        {% if result.Conference == "Eastern"%}
+        {% if result.Division == "Atlantic"%}
+          <div class="appi">
+            <span class="taulukko">
+              <span class="name">{{result.DivisionRank}} </span>
+              <span class="pos">{{result.City}} {{result.Name}} </span>
+              <span class="points">{{result.Percentage|floatformat:2}} %</span>
+              <span class="losses">{{result.OvertimeLosses}}</span>
+              <span class="draws">{{result.Losses}}</span>
+              <span class="wins">{{result.Wins}}</span>
+              {% for team in jsonResponse.logos %}
+                {% if team.Name == result.Name %}
+                  <img src="{{team.WikipediaLogoUrl}}" style="width:27px"/>
+                {% endif %}
+              {% endfor %}
+            </span>
+          </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      <br><br>
+      <h5>Metropolitan divisioona</h5>
+      {% for result in jsonResponse.standings %}
+      {% if result.Conference == "Eastern"%}
+      {% if result.Division == "Metropolitan"%}
+        <div class="appi">
+          <span class="taulukko">
+            <span class="name">{{result.DivisionRank}} </span>
+            <span class="pos">{{result.City}} {{result.Name}} </span>
+            <span class="points">{{result.Percentage|floatformat:2}} %</span>
+            <span class="losses">{{result.OvertimeLosses}}</span>
+            <span class="draws">{{result.Losses}}</span>
+            <span class="wins">{{result.Wins}}</span>
+            {% for team in jsonResponse.logos %}
+              {% if team.Name == result.Name %}
+                <img src="{{team.WikipediaLogoUrl}}" style="width:27px"/>
+              {% endif %}
+            {% endfor %}
+          </span>
+        </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+     </div>
+    </div>
+
+</body>
+<footer class="footer">
+    <div class="container">
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="/#/" class="px-2 text-muted">Jalkapallo</a></li>
+                <li class="nav-item"><a href="/hoki/" class="px-2 text-muted">Jääkiekko</a></li>
+                <li class="nav-item"><a href="/koris/" class="px-2 text-muted">Koripallo</a></li>
+                <li class="nav-item"><a href="/golf/" class="px-2 text-muted">Golf</a></li>
+                <li class="nav-item"><a href="/f1/" class="px-2 text-muted">Formula 1</a></li>
+                <li class="nav-item"><a href="/faqs/" class="px-2 text-muted">Usein kysyttyä</a></li>
+            </ul>
+            <p class="text-center text-muted">&copy; 2023 URHEILUTULOKSET</p>
+        </footer>
+    </div>
+</footer>
+</html>

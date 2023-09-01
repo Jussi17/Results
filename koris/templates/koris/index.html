@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    {% load static%}
+    <link rel="stylesheet" href=
+    "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-Z1DQmHg25iPJZS/5XoIJnZ5j6+H0mdKOyUg8iOI6Jwv09HlU6lKMz11iW+s1/w2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'futis/style.css'%}"/>
+</head>
+
+<body>
+    <nav class="navbar yla">
+        <a class="navbar-brand" href="/">
+            <div class="mainheader">
+            <h1>Urheilutulokset</h1>
+            </div>
+            <div class="links">
+              <a href="https://sportsdata.io/"><img src="{% static 'futis/io.png'%}" style="width: 50px"/></a>
+              <a href="https://ergast.com/mrd/"><img src="{% static 'futis/ergast.png'%}" style="width: 40px"/></a>
+              <a href="https://apifootball.com/"><img src="{% static 'futis/apifootball.png'%}" style="width: 100px"/></a>
+            </div>
+        </a>
+      </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/#/">Jalkapallo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/hoki/">Jääkiekko <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/koris/">Koripallo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/golf/">Golf</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/f1/">Formula 1</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/faqs/">Usein kysyttyä</a>
+              </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="parent">
+        <div class="lefti">
+      <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+          <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <h5>NBA</h5>
+            <br><br>
+          <li class="nav-item">
+            <a href="/koris/" class="nav-link active" aria-current="page">
+              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+              Tulokset
+            </a>
+          </li>
+          <li>
+            <a href="/koris/standings/" class="nav-link text-white">
+              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+              Sarjataulukko
+            </a>
+          </li>
+          <form class="formpvm" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="subbut" type="submit">Valitse</button>
+          </form>
+        </ul>
+        <hr>
+      </div>
+    </div>
+    
+    
+<div class="rightti">
+<h4>{{ current_date }}</h4>
+{% for game in games %}
+{% if game.Status != "NotNecessary" %}
+<div class="container match-container">
+  {% if game.Status == "Final"%}
+  Lopputulos
+  {% if game.SeasonType == 3%}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ottelu {{game.SeriesInfo.GameNumber}}
+  {% endif %}
+  {% else %}
+  Klo {{ game.DateTimeUTC|slice:"11:16" }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ottelu {{game.SeriesInfo.GameNumber}}
+  {% endif %}
+  <div class="app" style="height: 100px">
+    <div class="header" style="padding-top: 10px">
+      {% if game.GameID %}
+      <a href="{% url 'koris:boxscore' game_id=game.GameID %}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></a>
+      {% else%}
+      <h4>Ei otteluita</h4>
+        {% endif %}
+        <span class="team team-left">
+          {% for team in logos %}
+          {% if game.AwayTeam == team.Key %}
+          <img src="{{team.WikipediaLogoUrl}}" style="width:40px"/>
+          {% endif %}
+          {% endfor %}
+          <span class="name">{{game.AwayTeam}}</span>
+        </span>
+        <span class="score">{{game.AwayTeamScore|default:"0"}} - {{game.HomeTeamScore|default:"0"}}</span>
+        {% if game.SeasonType == 3 %}
+        {% if game.SeriesInfo.AwayTeamWins < 4 and game.SeriesInfo.HomeTeamWins < 4 %}
+          <span class="scoreseries">Ottelusarjan tilanne: {{game.SeriesInfo.AwayTeamWins|default:"0"}} - {{game.SeriesInfo.HomeTeamWins|default:"0"}}</span>
+        {% elif game.SeriesInfo.AwayTeamWins == 4 %}
+        <span class="scoreseries">{{game.AwayTeam}} voitti sarjan {{game.SeriesInfo.AwayTeamWins|default:"0"}} - {{game.SeriesInfo.HomeTeamWins|default:"0"}}</span>
+        {% elif game.SeriesInfo.HomeTeamWins == 4 %}
+        <span class="scoreseries">{{game.HomeTeam}} voitti sarjan {{game.SeriesInfo.HomeTeamWins|default:"0"}} - {{game.SeriesInfo.AwayTeamWins|default:"0"}}</span>
+        {% endif %}
+      {% endif %}
+        <span class="team team-right">
+          {% for team in logos %}
+          {% if game.HomeTeam == team.Key %}
+          <img src="{{team.WikipediaLogoUrl}}" style="width:40px"/>
+          {% endif %}
+          {% endfor %}
+          <span class="name">{{game.HomeTeam}}</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endfor %}
+    </div>
+      </div>
+    </div>
+</body>
+<footer class="footer">
+    <div class="container">
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="/#/" class="px-2 text-muted">Jalkapallo</a></li>
+                <li class="nav-item"><a href="/hoki/" class="px-2 text-muted">Jääkiekko</a></li>
+                <li class="nav-item"><a href="/koris/" class="px-2 text-muted">Koripallo</a></li>
+                <li class="nav-item"><a href="/golf/" class="px-2 text-muted">Golf</a></li>
+                <li class="nav-item"><a href="/f1/" class="px-2 text-muted">Formula 1</a></li>
+                <li class="nav-item"><a href="/faqs/" class="px-2 text-muted">Usein kysyttyä</a></li>
+            </ul>
+            <p class="text-center text-muted">&copy; 2023 URHEILUTULOKSET</p>
+        </footer>
+    </div>
+</footer>
+</html>

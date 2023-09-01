@@ -1,0 +1,296 @@
+.nav-link {
+    color: white !important;
+    }
+
+.container {
+    color: white;
+    width: 500px;
+    height: 120px;
+    margin: 15px auto;
+    margin-top: 5px;
+}
+
+div.links {
+    color: white;
+    float: right;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.app{
+    width: 500px;
+    height: 80px;
+    background-color: rgb(0, 173, 0);
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    box-shadow: 0 60px 45px -50px white,
+                0 -50px 45px -50px white;
+}
+div.appi{
+    color: white;
+    width: 500px;
+    height: 40px;
+    margin: 1px auto;
+    margin-top: 4px;
+    margin-right: 100px;
+    background-color: rgb(0, 173, 0);
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    box-shadow: 0 60px 45px -50px white,
+                0 -50px 45px -50px white;
+}
+
+
+div.extra-info {
+    background-color: white;
+    color: black;
+    width: 500px;
+    height: 120px;
+}
+
+div.header {
+    position: relative;
+    width: 100%;
+    height: 140px;
+}
+
+
+div.musta {
+    background-color: black;
+    color: white;
+}
+h1 {
+    font-family: 'Copperplate Gothic Light';
+    text-transform: uppercase;
+    color: rgb(0, 181, 0);
+}
+h5 {
+    color: white;
+}
+h4 {
+    color: white;
+    padding-left: 220px;
+    padding-bottom: 15px;
+}
+
+h2 {
+    color: white;
+}
+
+html {
+    height: 100%;
+}
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background-color: #332D2D;
+}
+
+footer {
+    background-color: #332D2D;
+    margin-top: auto;
+}
+
+span.team{
+    position: absolute;
+    width: 75%;
+    display: block;
+    text-align: center;
+}
+
+span.team-left{
+    float: left;
+    padding: 0% 0% 0% 10%;
+    padding-right: 70%;
+}
+
+span.team-right{
+    float: right;
+    padding: 0% 0% 0% 50%;
+    padding-left: 75%;
+}
+
+span.team span.name {
+    width: 50%;
+    display: block;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: white;
+}
+
+span.score {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    padding-top: 1%;
+    left: 0;
+    text-align: center;
+    font-size: 35px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: white;
+    line-height: 40px;
+}
+
+span.scoreseries {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    padding-top: 9%;
+    padding-right: 9%;
+    left: 20;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: white;
+    line-height: 40px;
+}
+
+span.record {
+    float:right;
+    font-size: 20px;
+    padding-right: 25px;
+}
+
+span.wins {
+    float: right;
+    font-size: 20px;
+    width: 40px;
+}
+span.draws {
+    float: right;
+    font-size: 20px;
+    width: 40px;
+}
+span.losses {
+    float: right;
+    font-size: 20px;
+    width: 40px;
+}
+
+span.points {
+    float: right;
+    font-size: 22px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.input-group-text {
+    background-color: #fff;
+    border: none;
+  }
+  
+  .fa-calendar {
+    font-size: 16px;
+    color: #007bff;
+  }
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: rgb(0, 173, 0);
+}
+select.liiga {
+    padding-left: 33px;
+    background-color: #332D2D;
+    color: white;
+    height: 40px;
+}
+div.sarja {
+    font-size: 26px;
+    color: white;
+    padding-left: 20px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+input.form-control {
+    font-size: 16px;
+    color: white;
+    background-color: #332D2D;
+    border-color: #332D2D;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    border-left: 2px solid white;
+  }
+
+div.pvm {
+    padding-top: 15px;
+}
+
+
+div.lefti {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    z-index: 999;
+    width: 280px;
+}
+div.rightti {
+    position: relative;
+    float:right;
+    width: 600px;
+    padding-right: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+div.righttiotsikot {
+    position: relative;
+    float:right;
+    width: 600px;
+    padding-left: 290px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+.ball {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-left: 5px;
+  }
+  
+  .promo {
+    background-color: #7CFC00; 
+  }
+  
+  .playoff {
+    background-color: #FFD700; 
+  }
+  
+  .rele {
+    background-color: #FF6347; 
+  }
+button.subbut {
+    padding-left: 75px;
+    color: white;
+    background-color: #332D2D;
+    text-align: center;
+}
+form.formpvm {
+    padding-top: 15px;
+}
+div.boxscore {
+    position: fixed;
+    top: 60%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    background-color: #332D2D;
+    color: white;
+    display: none;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    border-left: 2px solid white;   
+}
+div.bxpar {
+    padding-right: 400px;
+}
